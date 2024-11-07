@@ -15,6 +15,8 @@ name = sys.argv[2]
 branch = sys.argv[3]
 endpoint = sys.argv[4]
 
+print(os.listdir("."))
+
 with open(machine+'/env.sh', 'r') as file:
     env_file = file.read()
 
