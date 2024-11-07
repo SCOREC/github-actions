@@ -33,6 +33,7 @@ jobs:
         sparse-checkout: |
           run-globus.py
         sparse-checkout-cone-mode: false
+        clean: false
 
     - name: find directory
       run:
