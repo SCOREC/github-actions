@@ -8,7 +8,7 @@ on:
         type: string
 
 concurrency:
-  group: systems-${{ github.event.repository.name }}
+  group: systems-${{ inputs.machine }}
   cancel-in-progress: true
 
 jobs:
