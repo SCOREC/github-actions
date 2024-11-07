@@ -23,13 +23,13 @@ jobs:
 
     - name: find directory
       run:
-        ls -a
+        ls -a .github/workflow
 
     - name: checkout globus file
       uses: actions/checkout@v4
       with:
         repository: SCOREC/github-actions
-        path: ${{ github.event.repository.name }}/.github/workflows
+        path: .github/workflows
         sparse-checkout: |
           run-globus.py
         sparse-checkout-cone-mode: false
@@ -48,7 +48,7 @@ jobs:
     #       python -m pip install globus-compute-endpoint
 
     # - name: use globus
-    #   working-directory: ${{ github.event.repository.name }}/.github/workflows
+    #   working-directory: .github/workflows
     #   env:
     #     GLOBUS_ID: ${{ secrets.GLOBUS_COMPUTE_ID }}
     #     GLOBUS_SECRET: ${{ secrets.GLOBUS_COMPUTE_SECRET }}
@@ -60,13 +60,13 @@ jobs:
     #     python run-globus.py ${{ inputs.machine }} ${{ github.event.repository.name }} ${{ github.sha }} $TARGET_ENDPOINT
 
     # - name: print build log
-    #   working-directory: ${{ github.event.repository.name }}/.github/workflows
+    #   working-directory: .github/workflows
     #   run: cat Build.log
 
     # - name: print test log
-    #   working-directory: ${{ github.event.repository.name }}/.github/workflows
+    #   working-directory: .github/workflows
     #   run: cat Test.log
 
     # - name: check failed test
-    #   working-directory: ${{ github.event.repository.name }}/.github/workflows
+    #   working-directory: .github/workflows
     #   run: if grep "Failed" Test.log; then return 1; fi
