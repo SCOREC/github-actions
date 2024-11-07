@@ -23,7 +23,7 @@ jobs:
 
     - name: find directory
       run:
-        ls -a .github/workflow
+        ls -a .github/workflows
 
     - name: checkout globus file
       uses: actions/checkout@v4
