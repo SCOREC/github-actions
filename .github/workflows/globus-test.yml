@@ -22,9 +22,8 @@ jobs:
       uses: actions/checkout@v4
 
     - name: find directory
-      working-directory: ${{ github.event.repository.name }}/.github/workflows
       run:
-        ls -a pcms
+        ls -a
 
     - name: checkout globus file
       uses: actions/checkout@v4
