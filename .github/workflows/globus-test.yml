@@ -18,15 +18,13 @@ jobs:
 
     steps:
 
+    - name: checkout repo
+      uses: actions/checkout@v4
+
     - name: find directory
       run:
         pwd
         ls
-
-    - name: checkout repo
-      uses: actions/checkout@v4
-      with:
-        path: ${{ github.event.repository.name }}
 
     - name: checkout globus file
       uses: actions/checkout@v4
