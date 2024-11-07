@@ -21,10 +21,6 @@ jobs:
     - name: checkout repo
       uses: actions/checkout@v4
 
-    - name: find directory
-      run:
-        ls .github/workflows
-
     - name: checkout globus file
       uses: actions/checkout@v4
       with:
@@ -33,11 +29,6 @@ jobs:
         sparse-checkout: |
           run-globus.py
         sparse-checkout-cone-mode: false
-        clean: false
-
-    - name: find directory
-      run:
-        ls .github/workflows
 
     - name: setup python
       uses: actions/setup-python@v5
@@ -62,7 +53,7 @@ jobs:
         export GLOBUS_COMPUTE_CLIENT_SECRET="$GLOBUS_SECRET"
         if [ ${{ inputs.machine }} == "perlmutter" ]; then TARGET_ENDPOINT=0dd4499a-8d76-4977-bae9-841e4bb2f616; fi
         if [ ${{ inputs.machine }} == "frontier" ]; then TARGET_ENDPOINT=d625c6cf-de7a-4228-ac44-56247a642fe0; fi
-        python run-globus.py ${{ inputs.machine }} ${{ github.event.repository.name }} ${{ github.sha }} $TARGET_ENDPOINT
+        python globus/run-globus.py ${{ inputs.machine }} ${{ github.event.repository.name }} ${{ github.sha }} $TARGET_ENDPOINT
 
     - name: print build log
       working-directory: .github/workflows
