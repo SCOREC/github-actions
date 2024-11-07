@@ -27,6 +27,7 @@ jobs:
       uses: actions/checkout@v4
       with:
         repository: SCOREC/github-actions
+        path: ${{ github.event.repository.name }}/.github/workflows
         sparse-checkout: |
           run-globus.py
         sparse-checkout-cone-mode: false
