@@ -23,7 +23,7 @@ jobs:
 
     - name: find directory
       run:
-        ls -a .github/workflows
+        ls .github/workflows
 
     - name: checkout globus file
       uses: actions/checkout@v4
@@ -33,6 +33,10 @@ jobs:
         sparse-checkout: |
           run-globus.py
         sparse-checkout-cone-mode: false
+
+    - name: find directory
+      run:
+        ls .github/workflows
 
     - name: setup python
       uses: actions/setup-python@v5
