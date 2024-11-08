@@ -15,9 +15,6 @@ name = sys.argv[2]
 branch = sys.argv[3]
 endpoint = sys.argv[4]
 
-with open(machine+'/env.sh', 'r') as file:
-    env_file = file.read()
-
 with open(machine+'/install.sh', 'r') as file:
     install_file = file.read()
 
@@ -26,10 +23,6 @@ with open(machine+'/run.sh', 'r') as file:
 
 def run_on_endpoint(name, branch, env_file, install_file, run_file):
     import subprocess
-
-    with open(name+"-test/env.sh", "w") as text_file:
-        text_file.write("%s" % env_file)
-        text_file.close()
 
     with open(name+"-test/install.sh", "w") as text_file:
         text_file.write("%s" % install_file)
