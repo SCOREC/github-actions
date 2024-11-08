@@ -21,7 +21,7 @@ with open(machine+'/install.sh', 'r') as file:
 with open(machine+'/run.sh', 'r') as file:
     run_file = file.read()
 
-def run_on_endpoint(name, branch, env_file, install_file, run_file):
+def run_on_endpoint(name, branch, install_file, run_file):
     import subprocess
 
     with open(name+"-test/install.sh", "w") as text_file:
@@ -44,7 +44,7 @@ def run_on_endpoint(name, branch, env_file, install_file, run_file):
     return (install_result, run_result)
 
 gce = Executor(endpoint_id = endpoint)
-future = gce.submit(run_on_endpoint, name, branch, env_file, install_file, run_file)
+future = gce.submit(run_on_endpoint, name, branch, install_file, run_file)
 result = future.result()
 
 with open("Build.log", "w") as text_file:
