@@ -42,6 +42,7 @@ jobs:
       run: |
           python -m ensurepip --upgrade --user
           python -m pip install globus-compute-endpoint
+          python -m pip install dill==0.3.5.1
 
     - name: use globus
       working-directory: .github/workflows
