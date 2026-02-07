@@ -43,6 +43,7 @@ def run_on_endpoint(name, branch, install_file, run_file):
 
     return (install_result, run_result)
 
+print ("===Running tests on endpoint, this might take a few minutes===")
 gce = Executor(endpoint_id = endpoint)
 future = gce.submit(run_on_endpoint, name, branch, install_file, run_file)
 result = future.result()
@@ -55,3 +56,5 @@ if result[1] != None:
     with open("Test.log", "w") as text_file:
         text_file.write("%s" % result[1].stdout)
         text_file.close()
+
+print ("Done: output written to Build.log and Test.log in "+ os.getcwd())
