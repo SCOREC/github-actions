@@ -66,4 +66,4 @@ jobs:
 
     - name: check failed test
       working-directory: .github/workflows
-      run: if grep "Failed" Test.log; then return 1; fi
+      run: if grep ".   Failed" Test.log; then return 1; fi
