@@ -1,8 +1,10 @@
-#This file is used as an example on how to run the run-globus.py file
+#!/bin/bash -e
+
+# This file is used as an example on how to run the run-globus.py file
 
 # Instructions:
 # 1. Copy this file and run-globus.py into the same directory
-# 2. Follow instructions in run-globus.py
+# 2. Follow README to set up globus
 # 3. Edit inputs in this file to desired test
 # 4. Execute this file
 
@@ -15,7 +17,7 @@ endpoint=d625c6cf-de7a-4228-ac44-56247a642fe0
 # execution
 dir=$PWD
 
-source env.sh
+source env.sh #this file should contain authentication
 rm $repo -rf
 git clone https://github.com/SCOREC/$repo
 cd $repo/.github/workflows/

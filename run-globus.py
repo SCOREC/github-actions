@@ -1,10 +1,4 @@
-# How to use
-# 1. Login to https://app.globus.org/settings/developers and copy a project app id and secret
-# 2. Use the id and secret to create and endpoint https://funcx.readthedocs.io/en/latest/sdk.html#client-credentials-with-clients
-#     $ export FUNCX_SDK_CLIENT_ID="b0500dab-ebd4-430f-b962-0c85bd43bdbb"
-#     $ export FUNCX_SDK_CLIENT_SECRET="ABCDEFGHIJKLMNOP0123456789="
-# 3. Set up an endpoint on the computer that will run the tests, using these instructions: https://funcx.readthedocs.io/en/latest/endpoints.html
-# 4. Create install-test.sh and run-test.sh on target computer
+# This file will connect to an endpoint and run the supplied mashine file on that endpoint
 
 from globus_compute_sdk import Executor
 import sys
@@ -21,8 +15,15 @@ with open(machine+'/install.sh', 'r') as file:
 with open(machine+'/run.sh', 'r') as file:
     run_file = file.read()
 
+def get_working_dir():
+    import os
+    return os.getcwd()
+
 def run_on_endpoint(name, branch, install_file, run_file):
     import subprocess
+    import os
+
+    os.makedirs(name+"-test", exist_ok=True)
 
     with open(name+"-test/install.sh", "w") as text_file:
         text_file.write("%s" % install_file)
@@ -45,6 +46,8 @@ def run_on_endpoint(name, branch, install_file, run_file):
 
 print ("===Running tests on endpoint, this might take a few minutes===")
 gce = Executor(endpoint_id = endpoint)
+print ("Running at {0}".format(gce.submit(get_working_dir).result()))
+
 future = gce.submit(run_on_endpoint, name, branch, install_file, run_file)
 result = future.result()
 

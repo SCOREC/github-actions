@@ -17,7 +17,7 @@ ssh login05 << EOF
     cd /ccs/home/castia5/globus-compute
     source env.sh
     cd /lustre/orion/csc679/scratch/castia5/globus-compute
-    globus-compute-endpoint restart && globus-compute-endpoint list
+    globus-compute-endpoint restart --detach && globus-compute-endpoint list
 EOF
 
 sbatch sbatch-restart-globus.sh
