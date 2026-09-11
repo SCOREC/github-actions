@@ -48,12 +48,18 @@ jobs:
       working-directory: .github/workflows
       env:
         GLOBUS_ID: ${{ secrets.GLOBUS_COMPUTE_ID }}
-        GLOBUS_SECRET: ${{ secrets.GLOBUS_COMPUTE_SECRET }}
+        GLOBUS_SECRET_PERLMUTTER: ${{ secrets.GLOBUS_COMPUTE_SECRET_PERLMUTTER }}
+        GLOBUS_SECRET_FRONTIER: ${{ secrets.GLOBUS_COMPUTE_SECRET_FRONTIER }}
       run: |
         export GLOBUS_COMPUTE_CLIENT_ID="$GLOBUS_ID"
-        export GLOBUS_COMPUTE_CLIENT_SECRET="$GLOBUS_SECRET"
-        if [ ${{ inputs.machine }} == "perlmutter" ]; then TARGET_ENDPOINT=0dd4499a-8d76-4977-bae9-841e4bb2f616; fi
-        if [ ${{ inputs.machine }} == "frontier" ]; then TARGET_ENDPOINT=d625c6cf-de7a-4228-ac44-56247a642fe0; fi
+        if [ "${{ inputs.machine }}" == "perlmutter" ]; then
+          export GLOBUS_COMPUTE_CLIENT_SECRET="$GLOBUS_SECRET_PERLMUTTER"
+          export TARGET_ENDPOINT=2f93149a-349b-46fc-9544-4adf84d74447
+        fi
+        if [ "${{ inputs.machine }}" == "frontier" ]; then
+          export GLOBUS_COMPUTE_CLIENT_SECRET="$GLOBUS_SECRET_FRONTIER"
+          export TARGET_ENDPOINT=cfa0c132-09d4-4dc9-824b-a057eeb7a38c
+        fi
         python globus/run-globus.py ${{ inputs.machine }} ${{ github.event.repository.name }} ${{ github.sha }} $TARGET_ENDPOINT
 
     - name: print build log
